@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraphrasing Results</title>
+</head>
+<body>
+    <h1>Paraphrasing Results</h1>
+    
+    {% if final_paraphrased_texts %}
+        <ul>
+        {% for item in final_paraphrased_texts %}
+            <li>
+                <h3>Original Text (Amharic):</h3>
+                <p>{{ item.original }}</p>
+
+                <h3>Translated Text (English):</h3>
+                <p>{{ item.translated }}</p>
+
+                <h3>Paraphrased Texts (English):</h3>
+                <ul>
+                    {% for paraphrase in item.paraphrased_texts %}
+                        <li>{{ paraphrase }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h3>Retranslated Texts (Amharic):</h3>
+                <ul>
+                    {% for retranslated in item.retranslated_texts %}
+                        <li>{{ retranslated }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No paraphrasing results available.</p>
+    {% endif %}
+    
+    <br>
+    <a href="{% url 'paraphrase:translate' %}">Go back to Translate</a>
+</body>
+</html>
